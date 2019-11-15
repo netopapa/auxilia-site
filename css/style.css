@@ -23,6 +23,18 @@ h6 {
   color: #1e1e1e;
 }
 
+.redes-sociais {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+}
+
+.redes-sociais *{
+  color: #fff;
+}
+
 a {
   color: #1e1e1e;
   transition: all 0.5s ease-in-out;
