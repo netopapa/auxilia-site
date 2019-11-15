@@ -77,7 +77,7 @@ a:hover {
   transition: opacity .3s linear;
 }
 
-#img-logo.hide {
+.hide {
   opacity: 0;
 }
 
@@ -380,7 +380,7 @@ a:hover {
 .back-to-top {
   position: fixed;
   display: none;
-  background: #1E82C8;
+  background: #2abead;
   color: #fff;
   width: 44px;
   height: 44px;
@@ -1370,5 +1370,13 @@ footer .credits a {
 
   .img-about {
     width: 350px;
+  }
+
+  .container.inline {
+    flex-direction: column;
+  }
+
+  .not-in-mobile {
+    display: none !important;
   }
 }
