@@ -78,8 +78,10 @@
 		if ($(window).scrollTop() > pixels) {
 			$('.navbar-expand-md').addClass('navbar-reduce');
 			$('.navbar-expand-md').removeClass('navbar-trans');
+			$('#img-logo').removeClass('hide');
 		} else {
 			$('.navbar-expand-md').addClass('navbar-trans');
+			$('#img-logo').addClass('hide');
 			$('.navbar-expand-md').removeClass('navbar-reduce');
 		}
 		if ($(window).scrollTop() > top) {

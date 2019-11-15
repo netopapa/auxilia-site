@@ -50,12 +50,45 @@ a:hover {
   color: #4e4e4e;
 }
 
-.box-shadow,
-.paralax-mf,
-.service-box,
-.work-box,
-.card-blog {
-  box-shadow: 0 13px 8px -10px rgba(0, 0, 0, 0.1);
+.build-text {
+  font-size: 30px;
+  width: 260px;
+  margin-left: calc(50% - 130px);
+}
+
+#navbarDefault {
+  justify-content: space-between;
+}
+
+#img-logo {
+  height: 23px;
+  transition: opacity .3s linear;
+}
+
+#img-logo.hide {
+  opacity: 0;
+}
+
+.build-text:after {
+  overflow: hidden;
+  display: inline-block;
+  vertical-align: bottom;
+  -webkit-animation: ellipsis steps(4,end) 900ms infinite;      
+  animation: ellipsis steps(4,end) 900ms infinite;
+  content: "\2026"; /* ascii code for the ellipsis character */
+  width: 0px;
+}
+
+@keyframes ellipsis {
+  to {
+    width: 1.25em;    
+  }
+}
+
+@-webkit-keyframes ellipsis {
+  to {
+    width: 1.25em;    
+  }
 }
 
 .box-shadow-a,
@@ -104,7 +137,7 @@ a:hover {
 
 .paralax-mf {
   position: relative;
-  padding: 8rem 0;
+  padding: 3rem 0;
 }
 
 .display-table {
@@ -149,7 +182,11 @@ a:hover {
 /*--/ Title A /--*/
 
 .title-box {
-  margin-bottom: 4rem;
+  margin-bottom: 2rem;
+}
+
+.white-text {
+  color: #ffffff;
 }
 
 .title-a {
@@ -753,10 +790,6 @@ a:hover {
 //--//-->   COUNTER
 ======================================*/
 
-.section-counter {
-  background-color: #1E8278;
-}
-
 .counter-box {
   color: #fff;
   text-align: center;
@@ -783,10 +816,23 @@ a:hover {
 ======================================*/
 
 .work-box {
+  position: relative;
   margin-bottom: 3rem;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   background-color: #fff;
+}
+
+.work-box .building{
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(45, 45, 47, 0.9);
+  z-index: 9;
 }
 
 .work-box:hover img {
@@ -797,7 +843,7 @@ a:hover {
 .work-img {
   display: flex;
   overflow: hidden;
-  padding: 50px 0;
+  padding: 25px 0;
   align-items: center;
   justify-content: center;
 }
@@ -847,12 +893,20 @@ a:hover {
   background-attachment: fixed;
 }
 
+.foto-perfil {
+  width: 150px;
+  margin: 0 auto;
+  height: 150px;
+  background-size: cover;
+  background-position: center center;
+  border-radius: 50%;
+}
+
 .testimonials .owl-carousel .owl-item img {
   width: auto;
 }
 
 .testimonial-box {
-  color: #fff;
   text-align: center;
 }
 
@@ -865,10 +919,9 @@ a:hover {
 }
 
 .testimonial-box .author {
-  color: #fff;
   text-transform: uppercase;
   font-weight: 600;
-  margin: 1rem 0;
+  margin-top: 5px;
   display: block;
   font-size: 1.4rem;
 }
