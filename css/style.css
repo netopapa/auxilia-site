@@ -753,6 +753,10 @@ a:hover {
 //--//-->   COUNTER
 ======================================*/
 
+.section-counter {
+  background-color: #1E8278;
+}
+
 .counter-box {
   color: #fff;
   text-align: center;
@@ -791,8 +795,11 @@ a:hover {
 }
 
 .work-img {
-  display: block;
+  display: flex;
   overflow: hidden;
+  padding: 50px 0;
+  align-items: center;
+  justify-content: center;
 }
 
 .work-img img {
@@ -833,6 +840,12 @@ a:hover {
 /*======================================
 //--//-->   TESTIMONIALS
 ======================================*/
+
+.testimonials {
+  background-size: cover;
+  background-position: 0 50%;
+  background-attachment: fixed;
+}
 
 .testimonials .owl-carousel .owl-item img {
   width: auto;
@@ -1020,6 +1033,12 @@ a:hover {
   padding-left: 15px;
   text-transform: uppercase;
   margin-bottom: 1.5rem;
+}
+
+.inline {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 }
 
 .widget-sidebar .list-sidebar li {
@@ -1242,7 +1261,7 @@ footer .credits a {
   }
 
   .testimonial-box .description {
-    padding: 0 5rem;
+    /* padding: 0 5rem; */
   }
 
   .post-box,
@@ -1263,13 +1282,13 @@ footer .credits a {
 
 @media (min-width: 992px) {
   .testimonial-box .description {
-    padding: 0 8rem;
+    /* padding: 0 8rem; */
   }
 }
 
 @media (min-width: 1200px) {
   .testimonial-box .description {
-    padding: 0 13rem;
+    /* padding: 0 13rem; */
   }
 }
 
