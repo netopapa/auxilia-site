@@ -1,6 +1,6 @@
 jQuery(document).ready(function($) {
   "use strict";
-
+  
   //Contact
   $('form.contactForm').submit(function() {
     var f = $(this).find('.form-group'),
@@ -89,15 +89,12 @@ jQuery(document).ready(function($) {
       }
     });
     if (ferror) return false;
-    else var str = $(this).serialize();
-    var action = $(this).attr('action');
-    if( ! action ) {
-      action = 'contactform/contactform.php';
-    }
+    else var data = $(this).serialize();
+
     $.ajax({
       type: "POST",
-      url: action,
-      data: str,
+      url: 'http://auxiliatech.com.br/contactform/mailer/envio.php',
+      data: data,
       success: function(msg) {
         // alert(msg);
         if (msg == 'OK') {
