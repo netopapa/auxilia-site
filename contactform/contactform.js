@@ -93,7 +93,7 @@ jQuery(document).ready(function($) {
 
     $.ajax({
       type: "POST",
-      url: 'http://auxiliatech.com.br/contactform/mailer/envio.php',
+      url: 'https://auxiliatech.com.br/contactform/mailer/envio.php',
       data: data,
       success: function(msg) {
         // alert(msg);
@@ -104,7 +104,7 @@ jQuery(document).ready(function($) {
         } else {
           $("#sendmessage").removeClass("show");
           $("#errormessage").addClass("show");
-          $('#errormessage').html(msg);
+          $('#errormessage').html('Falha ao enviar email.');
         }
 
       }

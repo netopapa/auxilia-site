@@ -3,8 +3,6 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_erros', 1);
 error_reporting(E_ALL);
-header('Cache-Control: no-cache, must-revalidate');
-header('Content-Type: application/json; charset=utf8');
 
 //SERVIDOR DE E-MAIL
 define("MAILUSER", "nao-responder@auxiliatech.com.br");
@@ -26,45 +24,51 @@ function sendMail($assunto, $mensagem, $remetente, $nomeRemetente, $destino, $no
     require_once('PHPMailer/PHPMailerAutoload.php'); //Include pasta/classe do PHPMailer
 
     $mail = new PHPMailer(); //INICIA A CLASSE
-    $mail->IsSMTP(); //Habilita envio SMPT
-    $mail->SMTPAuth = true; //Ativa email autenticado
-    $mail->IsHTML(true);
+    try {
+        $mail->IsSMTP(); //Habilita envio SMPT
+        $mail->SMTPAuth = true; //Ativa email autenticado
+        $mail->IsHTML(true);
 
-    $mail->Host = '' . MAILHOST . ''; //Servidor de envio
-    $mail->Port = '' . MAILPORT . ''; //Porta de envio
-    $mail->Username = '' . MAILUSER . ''; //email para smtp autenticado
-    $mail->Password = '' . MAILPASS . ''; //seleciona a porta de envio
+        $mail->Host = '' . MAILHOST . ''; //Servidor de envio
+        $mail->Port = '' . MAILPORT . ''; //Porta de envio
+        $mail->Username = '' . MAILUSER . ''; //email para smtp autenticado
+        $mail->Password = '' . MAILPASS . ''; //seleciona a porta de envio
 
-    $mail->From = utf8_decode($remetente); //remtente
-    $mail->FromName = utf8_decode($nomeRemetente); //remtetene nome
+        $mail->From = utf8_decode($remetente); //remtente
+        $mail->FromName = utf8_decode($nomeRemetente); //remtetene nome
 
-    if ($anexo_pasta != NULL) {
-        $mail->AddAttachment($anexo_pasta); //Enviar anexo
+        if ($anexo_pasta != NULL) {
+            $mail->AddAttachment($anexo_pasta); //Enviar anexo
+        }
+
+        if ($reply != NULL) {
+            $mail->AddReplyTo(utf8_decode($reply), utf8_decode($replyNome));
+        }
+
+        $mail->Subject = utf8_decode($assunto); //assunto
+        $mail->Body = utf8_decode($mensagem); //mensagem
+        $mail->AddAddress(utf8_decode($destino), utf8_decode($nomeDestino)); //email e nome do destino
+
+        $aa = $mail->Send();
+        if ($aa) {
+            echo 'ok';
+        } else {
+            echo $mail->ErrorInfo;
+        }
+    } catch (phpmailerException $e) {
+        echo $e->errorMessage(); //Pretty error messages from PHPMailer
+    } catch (Exception $e) {
+        echo $e->getMessage(); //Boring error messages from anything else!
     }
-
-    if ($reply != NULL) {
-        $mail->AddReplyTo(utf8_decode($reply), utf8_decode($replyNome));
-    }
-
-    $mail->Subject = utf8_decode($assunto); //assunto
-    $mail->Body = utf8_decode($mensagem); //mensagem
-    $mail->AddAddress(utf8_decode($destino), utf8_decode($nomeDestino)); //email e nome do destino
-
-    if ($mail->Send()) {
-        return true;
-    } else {
-        return false;
-    }
+    return false;
 }
 
 $post = file_get_contents("php://input");
-$json = json_decode($post);
-
-$c['nome'] = $json->nome;
-$c['assunto'] = $json->assunto;
-$c['email'] = $json->email;
-$c['tel'] = $json->tel;
-$txt = $json->msg;;
+$c['nome'] = $_POST['name'];
+$c['assunto'] = $_POST['subject'];
+$c['email'] = $_POST['email'];
+$c['tel'] = $_POST['tel'];
+$txt = $_POST['message'];
 
 
 if (in_array('', $c)) {
@@ -118,10 +122,12 @@ if (in_array('', $c)) {
         "DestinoEmail" => EMAILATENDIMENTO //Email da pessoa que esta recebendo.
     );
 
-    $enviar_envio = sendMail($email_senha['Assunto'], $c['mensagem'], $email_senha['RemetenteEmail'], $email_senha['RemetenteNome'], $email_senha['DestinoEmail'], $email_senha['DestinoNone'], $email_senha['RemetenteEmail'], $replyNome = NULL, $anexo_pasta = NULL);
-    if ($enviar_envio) :
-        echo 'Email enviado com sucesso.';
-    else :
-        echo 'Erro ao enviar o Email.';
-    endif;
+    // $enviar_envio = sendMail($email_senha['Assunto'], $c['mensagem'], $email_senha['RemetenteEmail'], $email_senha['RemetenteNome'], $email_senha['DestinoEmail'], $email_senha['DestinoNone'], $email_senha['RemetenteEmail'], $replyNome = NULL, $anexo_pasta = NULL);
+    sendMail($email_senha['Assunto'], $c['mensagem'], $email_senha['RemetenteEmail'], $email_senha['RemetenteNome'], $email_senha['DestinoEmail'], $email_senha['DestinoNone'], $email_senha['RemetenteEmail'], $replyNome = NULL, $anexo_pasta = NULL);
+    // if ($enviar_envio) :
+    //     echo 'Email enviado com sucesso.';
+    // else :
+    //     // echo 'Erro ao enviar o Email.';
+    //     // var_dump($enviar_envio);
+    // endif;
 }
