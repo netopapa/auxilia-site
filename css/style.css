@@ -217,7 +217,7 @@ a:hover {
 }
 
 .flip-card:hover .flip-card-inner {
-  transform: rotateY(180deg);
+  /* transform: rotateY(180deg); */
 }
 
 .flip-card-front, .flip-card-back {
@@ -1265,12 +1265,26 @@ footer .credits a {
   padding: 15px;
   font-weight: 600;
   margin-bottom: 15px;
+  opacity: 0;
+  animation-name: erroshow;
+  animation-fill-mode: forwards;
+  animation-duration: .3s;
 }
 
 #sendmessage.show,
 #errormessage.show,
 .show {
   display: block;
+}
+
+@keyframes erroshow {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 .validation {
